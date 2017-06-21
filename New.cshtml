@@ -1,0 +1,24 @@
+﻿@model Rubyx.Models.WasteType
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Waste Type</h2>
+
+@using (Html.BeginForm("Create", "WasteTypes"))   
+{
+    <div class="form-group">
+        @Html.LabelFor(w => w.Name)
+        @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.EwcCode)
+        @Html.TextBoxFor(w => w.EwcCode, new { @class = "form-control" })
+    </div>
+}   
+
+@Html.AntiForgeryToken()
+
+<button type="submit" class="btn btn-primary">Save</button>

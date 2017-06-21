@@ -1,0 +1,27 @@
+﻿
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Rubyx", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("MCN Entry", "Index", "Sites")</li>
+                    <li>@Html.ActionLink("Quality Logs - Coming Soon", "", "")</li>
+                    <li>@Html.ActionLink("Waste Types", "Index", "WasteTypes")</li>
+                    <li>@Html.ActionLink("Destinations", "Index", "Destinations")</li>
+                    <li>@Html.ActionLink("Staff", "Index", "StaffMembers")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>

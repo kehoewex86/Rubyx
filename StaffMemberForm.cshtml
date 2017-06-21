@@ -1,0 +1,34 @@
+﻿@model Rubyx.ViewModels.StaffMemberFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Staff Member</h2>
+
+@using (Html.BeginForm("Save", "StaffMember"))
+{
+    @Html.ValidationSummary(true, "Please fix the below errors")
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.StaffMember.Name)
+        @Html.TextBoxFor(s => s.StaffMember.Name, new { @class = "form-control" })
+
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.Site)
+        @Html.DropDownListFor(s => s.Site, new SelectList(Model.Site, "Id", "Name"), "Select Site Name", new { @class = "form-control" })
+
+    </div>
+
+    @Html.HiddenFor(s => s.StaffMember.Id)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    
+
+    //back button that returns you to the index page
+    @Html.ActionLink("Back", "Index", "StaffMembers", null, new { @class = "btn btn-primary" })
+
+}

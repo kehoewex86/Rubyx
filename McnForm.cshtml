@@ -1,0 +1,149 @@
+﻿@model Rubyx.ViewModels.McnFormViewModel
+@{
+    ViewBag.Title = "MCN Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    h2{
+        position:relative;
+        padding:20px;
+        top:10px;
+    }
+
+    form{
+        position:relative;
+        top:10px;
+    }
+
+
+</style>
+
+
+<h2>Bidston MCN</h2>
+
+
+
+<div class="container">
+    @using (Html.BeginForm("Save", "BidstonHwrc", new { id = "mcnForm" }))
+    {
+        @*@Html.ValidationSummary(true, "Please fix the below errors")*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.McnNumber)
+                @Html.TextBoxFor(w => w.BidstonHwrc.McnNumber, new { @class = "form-control", @readonly = "readonly" })
+            </div>*@
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.Id)
+                @Html.TextBoxFor(w => w.BidstonHwrc.Id, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.DateEntered)
+                @Html.TextBoxFor(w => w.BidstonHwrc.DateEntered, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.WasteTypeId)
+                @Html.DropDownListFor(w => w.BidstonHwrc.WasteTypeId, new SelectList(Model.WasteType, "Id", "Name"), "Select Waste Type", new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(w => w.BidstonHwrc.WasteType)*@
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.DestinationId)
+                @Html.DropDownListFor(w => w.BidstonHwrc.DestinationId, new SelectList(Model.Destination, "Id", "Name"), "Select Destination", new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(w => w.BidstonHwrc.Destination)*@
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.Registration)
+                @Html.TextBoxFor(w => w.BidstonHwrc.Registration, new { @class = "form-control" })
+            </div>
+
+
+
+        </div>
+
+
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.DriverName)
+                @Html.TextBoxFor(w => w.BidstonHwrc.DriverName, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.Quantity)
+                @Html.TextBoxFor(w => w.BidstonHwrc.Quantity, new { @class = "form-control", placeholder = "If Applicable" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.Comments)
+                @Html.TextAreaFor(w => w.BidstonHwrc.Comments, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(w => w.BidstonHwrc.StaffMemberId)
+                @Html.DropDownListFor(w => w.BidstonHwrc.StaffMemberId, new SelectList(Model.StaffMember, "Id", "Name"), "Select User", new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(w => w.BidstonHwrc.StaffMember)*@
+            </div>
+
+
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                @Html.ActionLink("Back", "Index", "BidstonHwrc", null, new { @class = "btn btn-primary" })
+
+                @Html.HiddenFor(w => w.BidstonHwrc.Id)
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var bidstonMcn = '@(Model.BidstonHwrc.Id)';
+            //$('form').on("submit", function (e) {
+            //    e.preventDefault();
+
+            //    $.post("Save", $(this).serialize(), function (data) {
+            //        toastr
+            //    });
+            //});
+
+
+
+            $("form").submit(function (e) {
+                               
+                $.ajax({
+                    //url: "api/BidstonHwrc",
+                    success: function(){
+                        toastr.success("MCN Succesfully recorded");
+                    },
+                    error: function () {
+                        toastr.error("Something went wrong!")
+                    }
+                
+            })
+           
+
+
+
+            });
+
+        });
+
+   </script>
+    
+
+    }

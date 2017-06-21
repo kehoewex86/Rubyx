@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Rubyx.Models.Site>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Select HWRC Site</h2>
+
+<table id="sites" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Site Name</th>
+            <th>Site Prefix</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Site in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(Site.Name, "Index", "BidstonHwrc",null, new { @class = "form-group" })</td>
+                <td>@Site.SitePrefix</td>
+
+
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>

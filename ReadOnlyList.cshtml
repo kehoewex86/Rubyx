@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Rubyx.Models.BidstonHwrc>
+@{
+    ViewBag.Title = "Bidston MCN Entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+#btn-1{
+    position:relative;
+    top:20px;
+    padding-bottom: 60px;
+}
+
+#bidstonmcntable{
+    padding:15px;
+}
+
+.footer{
+    position:relative !important;
+    top: 100px !important;
+}
+
+
+
+
+</style>
+
+
+
+<h2>Bidston HWRC MCN List</h2>
+
+
+
+<div id="btn-1">
+    @Html.ActionLink("New MCN", "New", null, new { @class = "btn btn-primary" })
+</div>
+
+
+
+@*@if (!Model.Any())
+{
+    <p>There are no MCNs recorded for this site</p>
+}
+else { }*@
+
+<table id="bidstonmcntable" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>MCN Id</th>
+            <th>Date</th>
+            <th>Waste Type</th>
+            <th>Destination</th>
+            <th>Registration</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var bidstonhwrc in Model)  NOT RENDERING ON THE SERVER, SO REMOVED
+        {
+            <tr>
+                <td>@Html.ActionLink("Edit", "Edit","BidstonHwrc", new { id = bidstonhwrc.Id}, null)</td>
+                <td>@bidstonhwrc.Id</td>
+                <td>@bidstonhwrc.WasteType.Name</td>
+                <td>@bidstonhwrc.Destination.Name</td>
+                <td>@bidstonhwrc.Registration</td>
+                <td></td>
+                <td>@bidstonhwrc.StaffMember.Name</td> 
+                <td>
+                    <button data-bidstonhwrc-id = "@bidstonhwrc.Id" class="btn-link js-delete">Delete</button>
+                </td>
+                    
+
+
+            </tr>
+
+        }*@
+    </tbody>
+
+
+</table>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () { //find all elements of this class within this element
+            var table = $("#bidstonmcntable").DataTable({
+                "dom": '<"top"if>rt<"bottom"lp><"clear">',
+                ajax: {  //this is an object and property, with its own properties.  We call this in order to use API to generate the datatables
+                    url: "/api/BidstonHwrc",
+                    dataSrc:""
+                }, //now we specify the columns we want
+                columns: [
+                    {
+                        data: "id" //tells datatable where to get data for this column
+
+                    },
+                    {
+                        data: "dateEntered"
+                    },
+                    {
+                        data: "wasteType.name"
+                    },
+                    {
+                        data: "destination.name"
+                    },
+                    {
+                        data: "registration"
+                    },
+                    {
+                        data: "staffMember.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-bidstonhwrc-id= " + data + ">Delete</button>";
+                        }
+
+                    }
+
+                ]
+            });
+
+            table
+                .order([1, "desc"])
+                .draw();
+        });
+
+
+    </script>
+    
+    
+    
+    
+    
+    }
+
